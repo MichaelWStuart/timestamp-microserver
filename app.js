@@ -16,7 +16,7 @@ app.get('/:input', (req,res) => {
   try {
     res.send(time(req.params.input));
   } catch (e) {
-    console.error(e)
+    console.error(e);
     res.sendStatus(400);
   }
 });
