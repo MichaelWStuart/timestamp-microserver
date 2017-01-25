@@ -8,6 +8,10 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, 'favicon.ico'));
+});
+
 app.get('/:input', (req,res) => {
   try {
     res.send(time(req.params.input));
