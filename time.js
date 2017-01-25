@@ -20,6 +20,14 @@ module.exports = (dateString) => {
         return {unix, natural};
       }
     }
+  } else {
+    const parsedDate = new Date(Number(dateString));
+    if(isFinite(parsedDate)) {
+      let day = parsedDate.getUTCDate();
+      let month = MONTHS[parsedDate.getUTCMonth()];
+      let year = parsedDate.getUTCFullYear();
+      return {unix: dateString, natural: `${month} ${day}, ${year}`};
+    }
   }
   throw new Error('Invalid Format');
 }
