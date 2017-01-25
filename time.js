@@ -15,7 +15,7 @@ const parseUnix = (unixTimestamp) => {
     let day = parsedDate.getUTCDate();
     let month = MONTHS[parsedDate.getUTCMonth()];
     let year = parsedDate.getUTCFullYear();
-    return {unix: unixTimestamp, natural: `${month} ${day}, ${year}`};
+    return {unix: Number(unixTimestamp), natural: `${month} ${day}, ${year}`};
   }
   throw new Error('Invalid Format');
 }
