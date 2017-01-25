@@ -9,6 +9,17 @@ const getAlphaMonth = (value) => {
   });
 }
 
+const parseUnix = (unixTimestamp) => {
+  const parsedDate = new Date(Number(unixTimestamp));
+  if(isFinite(parsedDate)) {
+    let day = parsedDate.getUTCDate();
+    let month = MONTHS[parsedDate.getUTCMonth()];
+    let year = parsedDate.getUTCFullYear();
+    return {unix: unixTimestamp, natural: `${month} ${day}, ${year}`};
+  }
+  throw new Error('Invalid Format');
+}
+
 module.exports = (dateString) => {
   if (dateString.match(VALID_DATE_REGEX)) {
     let [month, day, year] = dateString.split(' ');
@@ -17,17 +28,11 @@ module.exports = (dateString) => {
       const natural = `${month} ${day}, ${year}`
       const unix = Date.parse(natural);
       if (!isNaN(unix)) {
-        return {unix, natural};
+        return parseUnix(unix);
       }
     }
   } else {
-    const parsedDate = new Date(Number(dateString));
-    if(isFinite(parsedDate)) {
-      let day = parsedDate.getUTCDate();
-      let month = MONTHS[parsedDate.getUTCMonth()];
-      let year = parsedDate.getUTCFullYear();
-      return {unix: dateString, natural: `${month} ${day}, ${year}`};
-    }
+    return parseUnix(dateString);
   }
   throw new Error('Invalid Format');
 }
