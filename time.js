@@ -34,5 +34,4 @@ module.exports = (dateString) => {
   } else {
     return parseUnix(dateString);
   }
-  throw new Error('Invalid Format');
 }
